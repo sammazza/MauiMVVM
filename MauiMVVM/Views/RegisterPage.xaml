@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="MauiMVVM.Views.RegisterPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:models="clr-namespace:MauiMVVM.Models"
+    xmlns:utils="clr-namespace:MauiMVVM.Utils"
+    xmlns:viewModels="clr-namespace:MauiMVVM.ViewModels"
+    Title="Registeration Page"
+    x:DataType="viewModels:RegisterPageViewModel">
+    <VerticalStackLayout BackgroundColor="LightBlue">
+        <Label
+            FontFamily="MaterialSymbols"
+            FontSize="100"
+            HorizontalOptions="Center"
+            Text="{x:Static utils:IconFonts.App_registration}"
+            VerticalOptions="Center" />
+        <Label
+            FontAttributes="Bold"
+            FontSize="Title"
+            HorizontalOptions="Center"
+            Text="User Register" />
+    </VerticalStackLayout>
+</ContentPage>

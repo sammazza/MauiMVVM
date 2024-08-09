@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage
+    x:Class="MauiMVVM.Views.LoginPage"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:models="clr-namespace:MauiMVVM.Models"
+    xmlns:utils="clr-namespace:MauiMVVM.Utils"
+    xmlns:viewModels="clr-namespace:MauiMVVM.ViewModels"
+    Title="Login Page"
+    x:DataType="viewModels:LoginPageViewModel">
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <viewModels:BoolToEyeIconConverter x:Key="BoolToEyeIconConverter" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <VerticalStackLayout BackgroundColor="AliceBlue">
+        <Label
+            FontFamily="MaterialSymbols"
+            FontSize="100"
+            HorizontalOptions="Center"
+            Text="{x:Static utils:IconFonts.Person}"
+            VerticalOptions="Center" />
+        <Label
+            FontAttributes="Bold"
+            FontSize="Title"
+            HorizontalOptions="Center"
+            Text="User Login" />
+        <Grid
+            Margin="15"
+            ColumnDefinitions="*,3*,*"
+            ColumnSpacing="2"
+            RowDefinitions="*,*,*,*,*"
+            RowSpacing="5">
+            <Label
+                Grid.Row="0"
+                Grid.Column="0"
+                Text="Name"
+                VerticalOptions="Center" />
+            <Entry
+                Grid.Row="0"
+                Grid.Column="1"
+                Keyboard="Email"
+                Placeholder="jane.doe@corp.com"
+                ReturnType="Next"
+                Text="{Binding Email}"
+                VerticalOptions="Center" />
+
+            <Label
+                x:Name="lblEmailError"
+                Grid.Row="1"
+                Grid.Column="1"
+                Text="{Binding MsgErrorEmail}"
+                TextColor="Red"
+                VerticalOptions="Center" />
+
+            <Label
+                Grid.Row="2"
+                Grid.Column="0"
+                Text="Password"
+                VerticalOptions="Center" />
+            <Entry
+                Grid.Row="2"
+                Grid.Column="1"
+                IsPassword="{Binding IsPasswordHidden}"
+                Placeholder="password"
+                ReturnType="Next"
+                Text="{Binding Password}"
+                VerticalOptions="Center" />
+            <Label
+                x:Name="iconEye"
+                Grid.Row="2"
+                Grid.Column="2"
+                Margin="-120,0,0,0"
+                FontFamily="MaterialSymbols"
+                FontSize="20"
+                HorizontalOptions="Center"
+                Text="{Binding IsPasswordHidden, Converter={StaticResource BoolToEyeIconConverter}}"
+                VerticalOptions="Center">
+                <Label.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding TogglePasswordVisibilityCommand}" />
+                </Label.GestureRecognizers>
+            </Label>
+            <Label
+                x:Name="lblPasswordError"
+                Grid.Row="3"
+                Grid.Column="1"
+                Text="{Binding MsgErrorPassword}"
+                TextColor="Red"
+                VerticalOptions="Center" />
+        </Grid>
+        <Button
+            x:Name="btnLogin"
+            Margin="0,0,0,30"
+            Command="{Binding LoginCommand}"
+            IsEnabled="{Binding FieldsOK}"
+            Text="Login"
+            WidthRequest="100" />
+
+        <Button
+            x:Name="btnCancel"
+            Command="{Binding CancelCommand}"
+            IsEnabled="{Binding IsCancellable}"
+            Text="Cancel"
+            WidthRequest="100" />
+
+        <Label
+            x:Name="lblLoginStatus"
+            Margin="0,30,0,0"
+            FontAttributes="Bold"
+            FontSize="Subtitle"
+            HorizontalOptions="Center"
+            Text="{Binding LoginStatus}"
+            TextColor="Green"
+            VerticalOptions="Center" />
+
+    </VerticalStackLayout>
+</ContentPage>
+
+<!--
+    FontFamily="MaterialSymbols"
+    FontSize="Body"
+    ClearButtonVisibility="WhileEditing"
+    Text="{x:Static utils:IconFonts.Visibility_off}"
+    GestureRecognizers="{Binding TapGestureRecognizer}"
+            <Label.GestureRecognizers>
+                <TapGestureRecognizer Command="{Binding TogglePasswordVisibilityCommand}" />
+            </Label.GestureRecognizers>
+
+
+<Entry Text="{Binding EntryText}" Placeholder="Enter text">
+    <Entry.Behaviors>
+        <toolkit:EventToCommandBehavior EventName="TextChanged" Command="{Binding TextChangedCommand}" CommandParameter="{Binding .}" />
+    </Entry.Behaviors>
+
+
+                <Entry.Behaviors>
+                    <viewModels:EventToCommandBehavior
+                        Command="{Binding EmailChangedCommand}"
+                        CommandParameter="{Binding Text, Source={x:Reference Name=entry}}"
+                        EventName="TextChanged" />
+                </Entry.Behaviors>
+</Entry>-->
